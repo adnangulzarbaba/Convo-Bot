@@ -73,14 +73,16 @@ def chatbot(user_input):
     intent = model.predict([user_input])[0]
     return responses.get(intent, "I'm not sure how to respond to that. Can you try asking something else?")
 
-# Voice Input (Speech-to-Text)
+# Voice Input (Speech-to-Text) using sounddevice backend
 def listen():
     recognizer = sr.Recognizer()
-    with sr.Microphone() as source:
+    
+    # Use sounddevice as the microphone source
+    with sr.Microphone(device_index=None) as source:  # device_index=None will use default microphone
         print("Listening...")
         recognizer.adjust_for_ambient_noise(source)
         audio = recognizer.listen(source)
-
+    
     try:
         user_input = recognizer.recognize_google(audio)
         print(f"You said: {user_input}")
@@ -91,3 +93,17 @@ def listen():
     except sr.RequestError:
         speak("Sorry, there was an issue with the speech service.")
         return None
+
+def chat():
+    while True:
+        user_input = listen()
+        if user_input:
+            if "exit" in user_input.lower() or "bye" in user_input.lower():
+                speak("Goodbye! Have a nice day!")
+                break
+            response = chatbot(user_input)
+            print(f"Bot: {response}")
+            speak(response)
+
+# Start chatting
+chat()
