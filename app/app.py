@@ -17,9 +17,9 @@ def index():
 
 @app.route("/voice", methods=["POST"])
 def voice():
-    user_input = listen()
+    user_input = listen()  # Get user input via microphone
     if user_input:
-        response = chatbot(user_input)
+        response = chatbot(user_input)  # Get chatbot response
         return jsonify(response=response)
     return jsonify(response="I couldn't understand your voice input.")
 
