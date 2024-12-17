@@ -1,1 +1,1 @@
-from .bot import chatbot
+from .bot import chatbot, listen, speak
