@@ -46,5 +46,14 @@ pip install -r requirements.txt
 python chatbot.py
 ```
 
+---
 
+## 🤝 Contributing
 
+PRs welcome! Feel free to fork the repo and suggest improvements.
+
+---
+
+## 📄 License
+
+MIT License © 2024
